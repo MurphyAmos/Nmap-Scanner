@@ -39,7 +39,6 @@ class NmapLearningTool:
         ### Using System to ping a url ###
         
         ### start main process of function, call pullIpPing, then go through with the stats ###                    
-        pullIpPing()
         nm = nmap.PortScanner()    
         userIP = pingResultHolder
         scanType = int(input("Pick a Scan Type:\n\t1: TCP Scan\n\t2: UDP Scan(Run in Root)\n\t3: In-Depth TCP(Run in Root)\n    Choice: "))
@@ -76,4 +75,5 @@ class NmapLearningTool:
     #### End of NmapScan() ####
                             ######### End of Functions in Class ######### 
     ######## RunSequence ########
+    pullIPPing()
     NmapScan() 
