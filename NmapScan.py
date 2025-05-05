@@ -14,7 +14,7 @@ from os import system
 #                                                    #
 #       ##### = section identifier                   #
 #                                                    #
-######################################################
+###################################################-MA
 class NmapLearningTool:
     #### Start of NmapScam() ####
     ### Take Ip from ping and do 1 of 3 scans: TCP, UDP , or indepth-TCP ### 
