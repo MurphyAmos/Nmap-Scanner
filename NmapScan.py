@@ -1,4 +1,5 @@
 import nmap, sys
+import subprocess
 from os import system
 ######################################################
 #                        KEY                         #
@@ -17,26 +18,30 @@ from os import system
 class NmapLearningTool:
     #### Start of NmapScam() ####
     ### Take Ip from ping and do 1 of 3 scans: TCP, UDP , or indepth-TCP ### 
-    def NmapScan():
-        #### Start of pullIpPing() ####
-        ### Using System to ping a url ###
-        def pullIpPing():
+    def pullIpPing():
             url = input("Website?: ") 
-            global userIP
-            pingResult = (system("ping -i 1 -c 1  " + url))
-            if(pingResult != 0):
-                ##if no respond then exit program
-                print("Server Is Not Responding, Try Again.")                   
-                sys.exit()
+            pingCommand = ("ping -i 1 -c 1  " + url)
+            pingOutput= subprocess.run(pingCommand, shell=True,text=True,capture_output=True)
+            pingCheck = system(pingcommand)
+            if(pingCheck != 256):
+                #strip down
+                global pingResultHolder
+                pingResultHolder = pingOutput.stdout.split(" ")[2].strip("()")
+                return(pingResultHolder)
             else:
-                ##will figure out way to pull ping into variable.. subprocess doesnt work:(
-                return 0
+                print("Server Is Not responding, Try Again")
+                sys.exit()
         #### End of pullIpPing() ####
 
+    def NmapScan():
+        global userIP
+        #### Start of pullIpPing() ####
+        ### Using System to ping a url ###
+        
         ### start main process of function, call pullIpPing, then go through with the stats ###                    
         pullIpPing()
         nm = nmap.PortScanner()    
-        userIP = input("Input IP from Ping: ")
+        userIP = pingResultHolder
         scanType = int(input("Pick a Scan Type:\n\t1: TCP Scan\n\t2: UDP Scan(Run in Root)\n\t3: In-Depth TCP(Run in Root)\n    Choice: "))
 
          
