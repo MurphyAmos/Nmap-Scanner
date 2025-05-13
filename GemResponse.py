@@ -7,8 +7,6 @@ class PortVulnerabilities:
         client = genai.Client(
             api_key = "API_KEY"
         )
-
-        googleSearch = Tool(google_search = GoogleSearch())
         response = client.models.generate_content_stream(
             model= "gemini-2.5-flash-preview-04-17",
             contents = [f"You are a redHat cyberSec engineer with descriptive answers. list 3 Vulnerabilities for each port:", ports, "; make each index no more than 50 words, take away all warnings. You Will not introduce yourself in this prompt"],
